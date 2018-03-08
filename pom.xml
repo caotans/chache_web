@@ -47,6 +47,10 @@
       <optional>true</optional>
       <scope>true</scope>
     </dependency>
+    <dependency>
+      <groupId>org.mongodb</groupId>
+      <artifactId>mongo-java-driver</artifactId>
+    </dependency>
   </dependencies>
   <build>
     <finalName>chache_web</finalName>

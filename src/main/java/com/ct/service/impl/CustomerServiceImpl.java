@@ -7,7 +7,7 @@ import org.codehaus.groovy.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.repository.Query;
+import org.springframework.data.mongodb.core.query.Query;
 
 import java.util.List;
 
@@ -23,12 +23,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<Customer> findByLastName(String lastName) {
-        Query query = new Query();
-        if (StringUtil.hasText(creator)) {
-            Criteria criteria = Criteria.where("creator").is(creator);
-            query.addCriteria(criteria);
-        }
-        return mongoTemplate.find(query, Customer.class);
+        Query query=new Query(Criteria.where("userName").is(lastName));
+        List<Customer> customerList = mongoTemplate.find(query , Customer.class);
+        return customerList;
 
     }
 }
