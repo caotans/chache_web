@@ -89,5 +89,6 @@
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:1.5.9.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.mongodb:mongo-java-driver:3.4.3" level="project" />
+    <orderEntry type="library" name="Maven: com.alibaba:fastjson:1.1.23" level="project" />
   </component>
 </module>

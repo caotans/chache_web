@@ -1,13 +1,17 @@
 package com.ct.service;
 
-import com.ct.entity.Customer;
+import com.ct.entity.UserLoginInfo;
 
 import java.util.List;
 
 public interface CustomerService  {
 
-    public Customer findByFirstName(String firstName);
+    public UserLoginInfo findByFirstName(String weChatNum);
 
 
-    public List<Customer> findByLastName(String lastName);
+    public List<UserLoginInfo> findByLastName(String lastName);
+
+    public void addUser(UserLoginInfo userLoginInfo);
+    public void updateUser(UserLoginInfo userLoginInfo);
+    public void deleteUser(UserLoginInfo userLoginInfo);
 }
