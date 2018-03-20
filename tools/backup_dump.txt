@@ -1,0 +1,8 @@
+window +x  
+a
+
+d:
+cd D:\ct_work\MongoDB\Server\3.6\bin
+
+mongodump -h 127.0.0.1:27017 -d chache_web -o D:\ct_work\chache_web\dump\   ±¸·Ý
+mongorestore -h 127.0.0.1:27017 -drop -d chache_web D:\ct_work\chache_web\dump\chache_web   »Ö¸´

@@ -1,4 +1,5 @@
 package com.ct.controller;
+import com.alibaba.fastjson.JSONObject;
 import com.ct.entity.UserLoginInfo;
 import com.ct.service.CustomerService;
 import org.apache.log4j.Logger;
@@ -7,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,36 +27,31 @@ public class UserLoginController {
         return "index";
     }
 
-    @RequestMapping("/add")
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
-    public String add(HttpServletRequest request){
-        String result="error";
+    public void add(HttpServletRequest request
+    ,@RequestParam(value="userLoginInfo", required=false) String userLoginInfo
+
+    ){
+        String result="0";
         try {
-            UserLoginInfo userLoginInfo=new UserLoginInfo();
-            userLoginInfo.setLoginCount(1);
-            userLoginInfo.setLoginTime(new Date());
-            userLoginInfo.setUserName("beibei");
-            userLoginInfo.setUserPhone("13223923988923");
-            userLoginInfo.setWeChatNum("dsfsjdsdf");
-            userLoginInfo.setIsInsider(1);
-            customerService.addUser(userLoginInfo);
-            result="success";
+            JSONObject jsonObject=JSONObject.parseObject(userLoginInfo);
+            customerService.addUser(jsonObject);
+            result="1";
         }catch (Exception e){
             e.printStackTrace();
             logger.error(e.getMessage());
         }
 
-        return result;
     }
 
     @RequestMapping("/del")
     @ResponseBody
-    public String del(HttpServletRequest request){
-        String result="error";
+    public String del(HttpServletRequest request,@RequestParam(value="weChatNum", required=false) String weChatNum){
+        String result="0";
         try {
-            UserLoginInfo userLoginInfo=new UserLoginInfo();
-            customerService.addUser(userLoginInfo);
-            result="success";
+            customerService.deleteUser("weChatNum",weChatNum,"userLoginInfo");
+            result="1";
         }catch (Exception e){
             e.printStackTrace();
             logger.error(e.getMessage());
@@ -62,14 +60,48 @@ public class UserLoginController {
         return result;
     }
 
+    /**
+     * 设置为会员
+     * @param request
+     * @param weChatNum
+     * @return
+     */
     @RequestMapping("/update")
     @ResponseBody
-    public String update(HttpServletRequest request){
-        String result="error";
+    public String update(HttpServletRequest request,@RequestParam(value="weChatNum", required=false) String weChatNum){
+        String result="0";
         try {
             UserLoginInfo userLoginInfo=new UserLoginInfo();
-            customerService.addUser(userLoginInfo);
-            result="success";
+            customerService.updateUser("weChatNum",weChatNum,"userLoginInfo","insider", 1);
+            result="1";
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error(e.getMessage());
+        }
+
+        return result;
+    }
+
+    /**
+     * 设置为会员
+     * @param request
+     * @param weChatNum
+     * @return
+     */
+    @RequestMapping("/findUser")
+    @ResponseBody
+    public String findUser(HttpServletRequest request,@RequestParam(value="weChatNum", required=false) String weChatNum){
+        String result="0";
+        try {
+            if(weChatNum==null){
+                return result;
+            }
+            UserLoginInfo userLoginInfo=new UserLoginInfo();
+            UserLoginInfo user= customerService.findUserByWeChatNum(weChatNum);
+            if(user!=null){
+                result="1";
+            }
+
         }catch (Exception e){
             e.printStackTrace();
             logger.error(e.getMessage());

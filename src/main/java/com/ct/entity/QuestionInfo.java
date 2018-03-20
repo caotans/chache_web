@@ -14,17 +14,19 @@ public class QuestionInfo implements Serializable{
     public String  answer;
     public int type;
     public int status;
+    public int questionId;
 
-    public QuestionInfo(String id, String title, String selecttion, String answer, int type, int status) {
+    public QuestionInfo() {
+    }
+
+    public QuestionInfo(String id, String title, String selecttion, String answer, int type, int status, int questionId) {
         this.id = id;
         this.title = title;
         this.selecttion = selecttion;
         this.answer = answer;
         this.type = type;
         this.status = status;
-    }
-
-    public QuestionInfo() {
+        this.questionId = questionId;
     }
 
     public String getId() {
@@ -73,5 +75,13 @@ public class QuestionInfo implements Serializable{
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public int getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(int questionId) {
+        this.questionId = questionId;
     }
 }

@@ -4,6 +4,7 @@ import com.sun.xml.internal.bind.v2.model.core.ID;
 import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class QuestionByUser implements Serializable {
 
@@ -12,15 +13,19 @@ public class QuestionByUser implements Serializable {
     public String  userId;
     public String  questionId;
     public String  userAnswer;
+    public Date doTime;
+    public int  poNum;
 
-    public QuestionByUser() {
-    }
-
-    public QuestionByUser(String id, String userId, String questionId, String userAnswer) {
+    public QuestionByUser(String id, String userId, String questionId, String userAnswer, Date doTime, int poNum) {
         this.id = id;
         this.userId = userId;
         this.questionId = questionId;
         this.userAnswer = userAnswer;
+        this.doTime = doTime;
+        this.poNum = poNum;
+    }
+
+    public QuestionByUser() {
     }
 
     public String getId() {
@@ -53,5 +58,21 @@ public class QuestionByUser implements Serializable {
 
     public void setUserAnswer(String userAnswer) {
         this.userAnswer = userAnswer;
+    }
+
+    public Date getDoTime() {
+        return doTime;
+    }
+
+    public void setDoTime(Date doTime) {
+        this.doTime = doTime;
+    }
+
+    public int getPoNum() {
+        return poNum;
+    }
+
+    public void setPoNum(int poNum) {
+        this.poNum = poNum;
     }
 }
