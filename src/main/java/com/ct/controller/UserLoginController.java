@@ -26,7 +26,10 @@ public class UserLoginController {
         modelMap.addAttribute("name","成功!");
         return "index";
     }
-
+    @RequestMapping("/login")
+    public String login(ModelMap modelMap){
+        return "login";
+    }
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public void add(HttpServletRequest request
