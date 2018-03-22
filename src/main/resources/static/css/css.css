@@ -48,22 +48,31 @@ body {
     width: 380px;
 }
 .login_btn_login{
-    background-image: url("../images/login.png");
+    background-image: url("../images/login2.png");
     width: 180px;
-    height: 120px;
+    height: 180px;
     display: block;
     background-repeat: no-repeat;
+    float: left;
+    margin-left: 300px;
 }
 .login_btn_regist{
-    background-image: url("../images/regist.png");
+    background-image: url("../images/regist2.png");
     width: 180px;
-    height: 120px;
+    height: 180px;
     display: block;
     background-repeat: no-repeat;
-
+    float: left;
 
 }
 .login_top{
     margin-top: 40px;
 
+}
+/*注册页面*/
+.regist_center{
+    background-image: url("../images/bak1.png");
+    background-size: cover;
+    width:500px;
+    height: 850px;
 }

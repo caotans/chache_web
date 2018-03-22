@@ -2,15 +2,13 @@ package com.ct.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.ct.entity.UserLoginInfo;
 import com.ct.service.CustomerService;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -18,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 @Controller
 public class UserLoginController {
-    private static Logger logger = Logger.getLogger(UserLoginController.class);
+    private static Logger logger = LoggerFactory.getLogger(UserLoginController.class);
     @Autowired
     private CustomerService customerService;
     @RequestMapping("/index")
@@ -28,7 +26,32 @@ public class UserLoginController {
     }
     @RequestMapping("/login")
     public String login(ModelMap modelMap){
+        logger.info("33333333333333333");
+        logger.error("33333333333333333");
         return "login";
+    }
+    @RequestMapping("/regist")
+    public String regist(ModelMap modelMap){
+        return "regist";
+    }
+
+
+
+
+    @RequestMapping(value = "/regist_start", method = RequestMethod.POST)
+    @ResponseBody
+    public void   regist_start(HttpServletRequest request
+            ,@RequestParam(value="userInfo", required=false) String userInfo
+
+    ){
+        try {
+            JSONObject jsonObject=JSONObject.parseObject(userInfo);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error(e.getMessage());
+        }
+
     }
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody

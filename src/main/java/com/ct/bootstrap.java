@@ -10,12 +10,24 @@ import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.context.annotation.Bean;
 
-
+/**
+*@Creaded  By: ct
+*@Date: 2018-3-22 ,9:25
+*@Desciption: 
+*@Param:  
+*@ReturnType: 
+*
+*/
 @SpringBootApplication
 public class bootstrap {
     public static void main(String[] args) {
         SpringApplication.run(bootstrap.class, args);
     }
+
+    /**
+     * initiateHttpConnector和servletContainer方法都是用来开通ssl协议的
+     * @return
+     */
     @Bean
     public EmbeddedServletContainerFactory servletContainer() {
 
@@ -35,6 +47,11 @@ public class bootstrap {
         tomcat.addAdditionalTomcatConnectors(initiateHttpConnector());
         return tomcat;
     }
+
+    /**
+     * initiateHttpConnector和servletContainer方法都是用来开通ssl协议的
+     * @return
+     */
 
     private Connector initiateHttpConnector() {
 
