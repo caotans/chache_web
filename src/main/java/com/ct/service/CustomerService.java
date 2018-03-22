@@ -46,4 +46,15 @@ public interface CustomerService  {
     public void addUser(JSONObject object);
     public void updateUser(String filed,String param,String collection,String upFiled,int upParam);
     public void deleteUser(String filed,String param,String collection);
+
+
+
+
+
+    //代购的代码**********************************************************************************************
+    public void regist_start(JSONObject object,String table);
 }
+
+
+
+

@@ -7,38 +7,46 @@
  *
  */
 var appRegist = function () {
-    var param = 3;
+    var isAccount=false;
+    var isName=false;
+    var isMima=false;
+    var isMima2=false;
+    var isPhone=false;
     return {
+        //初始化函数绑定按钮
         init: function () {
             // 注册校验事件
-            $("#account").blur(function () {
+            $("#account").bind('input propertychange', function() {
                 appRegist.validateAccount();
+
+
             });
-            $("#mima").blur(function () {
+            $("#mima").bind('input propertychange', function() {
                 appRegist.validateMima();
             });
 
-            $("#mima2").blur(function () {
+            $("#mima2").bind('input propertychange', function() {
                 appRegist. validateMima2();
 
             });
 
-            $("#name").blur(function () {
+            $("#name").bind('input propertychange', function() {
                 appRegist.validateName();
             });
-            $("#phone").blur(function () {
+            $("#phone").bind('input propertychange', function() {
                 appRegist.validatePhone();
             });
-
-
             //注册
             $(".regist_start_btn").bind("click", function () {
-                if(appRegist.validateAccount()&&appRegist.validateMima()&&appRegist.validateMima2()&&appRegist.validateName()&&appRegist.validatePhone()){
-                    alert(3333);
+                    var userInfo2={"account":$.trim($("#account").val()),"mima":hex_md5($.trim($("#mima").val())),"name":$.trim($("#name").val()),"phone":$.trim($("#phone").val())};
+                    var oo={"userInfo":userInfo2};
                     $.ajax({
-                        type: "post",
+                        type: "POST",
                         dataType: "json",
-                        data: {},
+                        headers : {
+                            'Content-Type' : 'application/json;charset=utf-8'
+                        },
+                        data: JSON.stringify(oo),
                         url: "regist_start",
                         success: function (data) {
 
@@ -48,7 +56,7 @@ var appRegist = function () {
                         }
 
                     });
-                }
+
 
             })
 
@@ -64,23 +72,36 @@ var appRegist = function () {
             var account = $("#account").val();
             if (!account) {
                 $("#account_error").text("账号不能为空！");
-                return false;
+                isAccount=false;
             } else {
                 $("#account_error").text("");
-                return true;
+                isAccount=true;
             }
+            this.showSubmit();
         },
         //校验密码
         validateMima: function () {
-
             var mima = $("#mima").val();
             if (!mima) {
                 $("#mima_error").text("密码不能为空！");
-                return false;
+                isMima=false;
             } else {
-                $("#mima_error").text("");
-                return true;
+                var mima2 = $("#mima2").val();
+                if(mima2){
+                    if(mima2!=mima){
+                        $("#mima2_error").text("两次输入的密码不一致！");
+                        isMima=false;
+                    }else{
+                        $("#mima_error").text("");
+                        isMima=true;
+                    }
+                }else{
+                    $("#mima_error").text("");
+                    isMima=true;
+                }
+
             }
+            this.showSubmit();
         },
         //校验确认密码
         validateMima2: function () {
@@ -88,35 +109,35 @@ var appRegist = function () {
             var mima2 = $("#mima2").val();
             if (!mima2 || !mima) {
                 $("#mima2_error").text("确认密码不能为空！");
-                return false;
+                isMima2=false;
             } else {
                 if (mima != mima2) {
                     $("#mima2_error").text("两次输入的密码不一致！");
-                    return false;
+                    isMima2=false;
                 } else {
                     $("#mima2_error").text("");
-                    return true;
+                    isMima2=true;
                 }
             }
-
+            this.showSubmit();
         },
         //校验姓名
         validateName: function () {
             var name = $("#name").val();
             if (!name) {
                 $("#name_error").text("姓名不能为空！");
-                return false;
+                isName=false;
             } else {
                 var re1 = new RegExp("^[0-9a-zA-Z\u4e00-\u9fa5_]{3,16}$");
                 if (!re1.test(name)) {
                     $("#name_error").text("");
-                    return true;
+                    isName=true;
                 } else {
                     $("#name_error").text("姓名格式不正确！");
-                    return false;
+                    isName=false;
                 }
             }
-
+            this.showSubmit();
         },
         //校验手机号
         validatePhone: function () {
@@ -124,21 +145,33 @@ var appRegist = function () {
 
             if (!phone) {
                 $("#phone_error").text("手机号码不能为空！");
-                return false;
+                isPhone=false;
             } else {
                 phone=$.trim(phone);
                 var re1 = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
                 if (!re1.test(phone)) {
-                    alert(33);
                     $("#phone_error").text("手机号码格式不正确！");
-                    return false;
+                    isPhone=false;
                 } else {
-                    alert(444);
                     $("#phone_error").text("");
-                    return true;
+                    isPhone=true;
                 }
             }
+            this.showSubmit();
+        },
+        //判断校验是否全部通过，是的话提交按钮就可以用了
+        showSubmit:function () {
+              if(isAccount&&isMima&&isMima2&&isName&&isPhone){
+                $(".regist_start_btn").removeAttr("disabled");
+              }else{
+                  $(".regist_start_btn").attr("disabled",true);
+              }
+              return false;
+
         }
+
+
+
 
     }
 }();

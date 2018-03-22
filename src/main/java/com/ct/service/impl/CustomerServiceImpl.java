@@ -110,4 +110,9 @@ public class CustomerServiceImpl implements CustomerService {
         }
 
     }
+
+    //代购的代码**********************************************************************************************
+    public void regist_start(JSONObject object,String table){
+        mongoTemplate.insert(object,table);
+    }
 }
