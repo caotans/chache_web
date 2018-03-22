@@ -4,7 +4,9 @@
 <head>
     <title>登陆</title>
     <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <link rel="stylesheet" type="text/css" href="../static/css/css.css"/>
+    <link rel="stylesheet" th:href="@{../static/css/css.css}" />
+    <script type="text/javascript" th:src="@{../static/js/jquery-3.2.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{../static/js/login/login.js}"></script>
 </head>
 <body>
     <div class="loginContainer">
@@ -21,7 +23,7 @@
                 </div>
 
                <div class="login_top">
-                   <a class="login_btn_login">aaa</a>  <a class="login_btn_regist">bbb</a>
+                   <a class="login_btn_login"></a>  <a class="login_btn_regist"></a>
                </div>
         </div>
 
