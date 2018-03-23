@@ -12,14 +12,16 @@ var appRegist = function () {
     var isMima=false;
     var isMima2=false;
     var isPhone=false;
+    var isExist=false;
     return {
         //初始化函数绑定按钮
         init: function () {
             // 注册校验事件
             $("#account").bind('input propertychange', function() {
                 appRegist.validateAccount();
-
-
+            });
+            $("#account").blur(function () {
+                appRegist.validateAccountIsExist();
             });
             $("#mima").bind('input propertychange', function() {
                 appRegist.validateMima();
@@ -159,9 +161,11 @@ var appRegist = function () {
             }
             this.showSubmit();
         },
+         v
+        ,
         //判断校验是否全部通过，是的话提交按钮就可以用了
         showSubmit:function () {
-              if(isAccount&&isMima&&isMima2&&isName&&isPhone){
+              if(isAccount&&isMima&&isMima2&&isName&&isPhone&&isExist){
                 $(".regist_start_btn").removeAttr("disabled");
               }else{
                   $(".regist_start_btn").attr("disabled",true);
@@ -178,6 +182,8 @@ var appRegist = function () {
 
 $(function () {
     appRegist.init();
-
+    var screenWidth=document.documentElement.clientWidth / 6.5 + 'px';//以650设计稿来算
+    console.log(screenWidth);
+    document.documentElement.style.fontSize = screenWidth;
 
 });

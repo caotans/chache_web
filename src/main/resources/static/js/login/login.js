@@ -7,7 +7,6 @@
 *
 */
 var appLogin = function(){
-    var param=3;
     return {
         init : function(){
            $(".login_btn_regist").bind("click",function(){
@@ -24,7 +23,9 @@ var appLogin = function(){
 
 $(function(){
     appLogin.init();
-
+    var screenWidth=document.documentElement.clientWidth / 6.5 + 'px';//以650设计稿来算
+    console.log(screenWidth);
+    document.documentElement.style.fontSize = screenWidth;
 
 
 });
