@@ -7,19 +7,23 @@
     <link rel="stylesheet" th:href="@{../static/css/css.css}" />
     <script type="text/javascript" th:src="@{../static/js/jquery-3.2.1.min.js}"></script>
     <script type="text/javascript" th:src="@{../static/js/login/login.js}"></script>
+    <script type="text/javascript" th:src="@{../static/js/md5.js}"></script>
 </head>
 <body>
     <div class="loginContainer">
 
         <div class="login_center">
-              <div class="login_title">曹慢慢(海外代购)</div>
+                <div class="login_info login_top2">
+                    <label style="text-align: right;width: 1.3rem;"></label>
+                    <span class="error_msg smallFont"></span>
+                </div>
                 <div class="login_info">
                     <label style="text-align: right;width: 1.3rem;">用户名:</label>
-                    <input type="text"/>
+                    <input type="text" id="account" placeholder="邮箱/手机号"/>
                 </div>
                 <div class="login_info">
                     <label style="text-align: right;width: 1.3rem;">密码:</label>
-                    <input type="text"/>
+                    <input type="text" id="mima"/>
                 </div>
 
                <div class="login_top">
@@ -27,6 +31,30 @@
                </div>
         </div>
 
+
     </div>
+    <div class="msg_container">
+        <div class="msg_window">
+            <div class="msg_title smallFont">确认框提示</div>
+            <div class="msg_content middleFont">注册成功,正在跳转...
+                注册成功,正在跳转...
+                注册成功,正在跳转...
+                注册成功,正在跳转...
+                注册成功,正在跳转...
+                注册成功,正在跳转...
+                注册成功,正在跳转...
+                注册成功,正在跳转...注册成功,正在跳转...
+                注册成功,正在跳转...
+
+
+            </div>
+            <div class="msg_footer">
+                <button class="padding_btn">取消</button>
+                <button>确定</button>
+            </div>
+        </div>
+    </div>
+
+
 </body>
 </html>

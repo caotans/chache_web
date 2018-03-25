@@ -53,6 +53,18 @@ public interface CustomerService  {
 
     //代购的代码**********************************************************************************************
     public void regist_start(JSONObject object,String table);
+
+    /**
+     * 检查账号是否存在
+     * @return
+     */
+    public boolean accountIsExist (JSONObject jsonObject,String collection);
+    /**
+     * 登陆
+     * @return
+     */
+    public String jumpToMain (JSONObject jsonObject,String collection);
+
 }
 
 

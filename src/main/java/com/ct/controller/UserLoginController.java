@@ -150,4 +150,54 @@ public class UserLoginController {
         }
         return result;
     }
+
+    /**
+     *
+     *账号是否存在
+     * @param request
+     * @param response
+     * @param jsonObject
+     * @return
+     */
+    @RequestMapping(value = "/accountIsExist", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean  accountIsExist(HttpServletRequest request,HttpServletResponse response
+            ,@RequestBody JSONObject jsonObject
+
+    ) {
+        boolean result = false;//0是失败
+        try {
+            result = customerService.accountIsExist(jsonObject,"user");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error(e.getMessage());
+        }
+        return result;
+    }
+
+    /**
+     *
+     *登陆
+     * @param request
+     * @param response
+     * @param jsonObject
+     * @return
+     */
+    @RequestMapping(value = "/jumpToMain", method = RequestMethod.POST)
+    @ResponseBody
+    public String  jumpToMain(HttpServletRequest request,HttpServletResponse response
+            ,@RequestBody JSONObject jsonObject
+
+    ) {
+        String result = "no";//默认是账号不存在的
+        try {
+            result = customerService.jumpToMain(jsonObject,"user");
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error(e.getMessage());
+        }
+        return result;
+    }
+
 }

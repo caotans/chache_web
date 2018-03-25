@@ -40,25 +40,35 @@ var appRegist = function () {
             });
             //注册
             $(".regist_start_btn").bind("click", function () {
-                    var userInfo2={"account":$.trim($("#account").val()),"mima":hex_md5($.trim($("#mima").val())),"name":$.trim($("#name").val()),"phone":$.trim($("#phone").val())};
-                    var oo={"userInfo":userInfo2};
-                    $.ajax({
-                        type: "POST",
-                        dataType: "json",
-                        headers : {
-                            'Content-Type' : 'application/json;charset=utf-8'
-                        },
-                        data: JSON.stringify(oo),
-                        url: "regist_start",
-                        success: function (data) {
+                    if(isAccount&&isMima&&isMima2&&isExist&&isName,isPhone){
+                        var userInfo2={"account":$.trim($("#account").val()),"mima":hex_md5($.trim($("#mima").val())),"name":$.trim($("#name").val()),"phone":$.trim($("#phone").val())};
+                        var oo={"userInfo":userInfo2};
+                        $.ajax({
+                            type: "POST",
+                            dataType: "text",
+                            headers : {
+                                'Content-Type' : 'application/json;charset=utf-8'
+                            },
+                            data: JSON.stringify(oo),
+                            url: "regist_start",
+                            success: function (data) {
+                                if(data==1){
+                                    alert("注册成功");
+                                }
+                            },
+                            error: function () {
 
-                        },
-                        error: function () {
+                            }
 
-                        }
-
-                    });
-
+                        });
+                    }else{
+                        appRegist.validateAccount();
+                        appRegist.validateAccountIsExist();
+                        appRegist.validateMima();
+                        appRegist.validateMima2();
+                        appRegist.validateName();
+                        appRegist.validatePhone();
+                    }
 
             })
 
@@ -79,7 +89,7 @@ var appRegist = function () {
                 $("#account_error").text("");
                 isAccount=true;
             }
-            this.showSubmit();
+
         },
         //校验密码
         validateMima: function () {
@@ -103,7 +113,7 @@ var appRegist = function () {
                 }
 
             }
-            this.showSubmit();
+
         },
         //校验确认密码
         validateMima2: function () {
@@ -121,7 +131,7 @@ var appRegist = function () {
                     isMima2=true;
                 }
             }
-            this.showSubmit();
+
         },
         //校验姓名
         validateName: function () {
@@ -139,7 +149,7 @@ var appRegist = function () {
                     isName=false;
                 }
             }
-            this.showSubmit();
+
         },
         //校验手机号
         validatePhone: function () {
@@ -159,20 +169,39 @@ var appRegist = function () {
                     isPhone=true;
                 }
             }
-            this.showSubmit();
-        },
-         v
-        ,
-        //判断校验是否全部通过，是的话提交按钮就可以用了
-        showSubmit:function () {
-              if(isAccount&&isMima&&isMima2&&isName&&isPhone&&isExist){
-                $(".regist_start_btn").removeAttr("disabled");
-              }else{
-                  $(".regist_start_btn").attr("disabled",true);
-              }
-              return false;
 
-        }
+        },
+        validateAccountIsExist:function(){
+            var account=$("#account").val();
+            if(account){
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    headers : {
+                        'Content-Type' : 'application/json;charset=utf-8'
+                    },
+                    data: JSON.stringify({"account":$("#account").val()}),
+                    url: "accountIsExist",
+                    success: function (data) {
+                        if(data){
+                            $("#account_error").text("账号已存在！");
+                            isExist=true;
+
+                        }else{
+                            isExist=false;
+                            $("#account_error").text("");
+
+                        }
+                    },
+                    error: function () {
+
+                    }
+
+                });
+            }
+
+
+          }
 
 
 
@@ -182,8 +211,14 @@ var appRegist = function () {
 
 $(function () {
     appRegist.init();
-    var screenWidth=document.documentElement.clientWidth / 6.5 + 'px';//以650设计稿来算
-    console.log(screenWidth);
-    document.documentElement.style.fontSize = screenWidth;
+    var temp=document.documentElement.clientWidth;
+    console.log(temp);
+    if(temp>1200){
+        document.documentElement.style.fontSize = 100+"px";
+    }else{
+        var screenWidth=temp / 6.5 + 'px';//以650设计稿来算
+        document.documentElement.style.fontSize = screenWidth;
+    }
+
 
 });
