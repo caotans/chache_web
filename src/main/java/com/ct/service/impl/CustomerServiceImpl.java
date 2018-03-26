@@ -153,4 +153,26 @@ public class CustomerServiceImpl implements CustomerService {
 
         return flag;
     }
+
+    /**
+     * 根据用户名查找用户的信息,放到缓存里面
+     * @param account
+     * @return
+     */
+    public User findUserByAccount(String account){
+        Query query=new Query();
+        Criteria queryCri = Criteria.where("account").is(account);
+        query.addCriteria(queryCri);
+        User  user=mongoTemplate.findOne(query,User.class);
+        return user;
+    };
+
+    /**
+     * 查询所有产品
+     * @return
+     */
+    public List<Product> findProduct(){
+       List<Product> list=mongoTemplate.findAll(Product.class);
+        return list;
+    }
 }

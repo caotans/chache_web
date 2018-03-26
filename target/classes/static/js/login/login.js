@@ -22,9 +22,10 @@ var appLogin = function(){
                     data: JSON.stringify({"account":$.trim($("#account").val()),"mima":hex_md5($.trim($("#mima").val()))}),
                     url: "jumpToMain",
                     success: function (data) {
-                        console.log(data);
                         if(data=="yes"){
-                           window.location.href="";
+                            $(".msg_container").show();
+                            $(".msg_window").show();
+                           window.location.href="loginToMain?account="+$.trim($("#account").val());
                         }else if(data=="no"){
                             $(".error_msg").text("*该账号不存在！");
 
@@ -57,6 +58,8 @@ $(function(){
         var screenWidth=temp / 6.5 + 'px';//以650设计稿来算
         document.documentElement.style.fontSize = screenWidth;
     }
+
+    $('#full_feature').swipeslider();
 
 
 

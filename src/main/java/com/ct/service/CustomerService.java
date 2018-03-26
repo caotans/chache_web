@@ -2,7 +2,9 @@ package com.ct.service;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.ct.entity.Product;
 import com.ct.entity.QuestionInfo;
+import com.ct.entity.User;
 import com.ct.entity.UserLoginInfo;
 
 import java.util.List;
@@ -64,6 +66,19 @@ public interface CustomerService  {
      * @return
      */
     public String jumpToMain (JSONObject jsonObject,String collection);
+
+    /**
+     * 根据用户名查找用户的信息,放到缓存里面
+     * @param account
+     * @return
+     */
+   public User findUserByAccount(String account);
+
+    /**
+     * 查询所有产品
+     * @return
+     */
+   public List<Product> findProduct();
 
 }
 

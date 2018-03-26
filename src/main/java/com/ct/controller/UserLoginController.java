@@ -1,21 +1,20 @@
 package com.ct.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.ct.entity.Product;
+import com.ct.entity.User;
 import com.ct.entity.UserLoginInfo;
 import com.ct.service.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 @Controller
 public class UserLoginController {
@@ -200,4 +199,19 @@ public class UserLoginController {
         return result;
     }
 
+    /**
+     * 登录到产品首页
+     * @param modelMap
+     * @return
+     */
+    @RequestMapping("/loginToMain")
+    public String loginToMain(ModelMap modelMap
+     ,@RequestParam(value = "account", required = false) String account){
+        //根据用户查找所有的产品和用户ID
+
+        User user=customerService.findUserByAccount(account);
+        List<Product> list=customerService.findProduct();
+        modelMap.addAttribute("listProduct", list);
+        return "index/loginToMain";
+    }
 }

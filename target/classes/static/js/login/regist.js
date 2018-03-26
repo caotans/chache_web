@@ -53,7 +53,11 @@ var appRegist = function () {
                             url: "regist_start",
                             success: function (data) {
                                 if(data==1){
-                                    alert("注册成功");
+                                    $(".msg_container").show();
+                                    $(".msg_window").show();
+                                    setTimeout(function () {
+                                        window.location.href="loginToMain?account="+$.trim($("#account").val());
+                                    },1000)
                                 }
                             },
                             error: function () {
