@@ -7,6 +7,7 @@ import com.ct.entity.*;
 import com.ct.entity.UserLoginInfo;
 import com.ct.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoDbUtils;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Order;
@@ -112,6 +113,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     //代购的代码**********************************************************************************************
     public void regist_start(JSONObject object,String table){
+        object.put("permission","0");//一般人都是普通权限
         mongoTemplate.insert(object,table);
     }
 
@@ -174,5 +176,32 @@ public class CustomerServiceImpl implements CustomerService {
     public List<Product> findProduct(){
        List<Product> list=mongoTemplate.findAll(Product.class);
         return list;
+    }
+
+    /**
+     * 查询自增ID
+     * @param field
+     * @param value
+     * @return
+     */
+    public int getCollectionCount(String field,String value,Class cl){
+        Query query=new Query();
+        Criteria queryCri = Criteria.where(field).all();
+        query.addCriteria(queryCri);
+        // 获取满足条件的总条数
+        int totalCount =Integer.parseInt(String.valueOf( mongoTemplate.count(query, cl) ));
+        return totalCount;
+    }
+
+    /**
+     * 批量增加产品
+     * @param list
+     * @param cl
+     */
+    public void addProduct(List<Product> list,Class cl){
+        for(int i=0;i<list.size();i++){
+            mongoTemplate.insert(list.get(i));
+        }
+
     }
 }

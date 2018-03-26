@@ -1,6 +1,7 @@
 package com.ct.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.ct.common.ImpAndExpExcel;
 import com.ct.entity.Product;
 import com.ct.entity.User;
 import com.ct.entity.UserLoginInfo;
@@ -11,9 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 @Controller
@@ -122,8 +127,6 @@ public class UserLoginController {
     //代购的代码**********************************************************************************************
     @RequestMapping("/login")
     public String login(ModelMap modelMap) {
-        logger.info("33333333333333333");
-        logger.error("33333333333333333");
         return "login";
     }
 
@@ -206,12 +209,45 @@ public class UserLoginController {
      */
     @RequestMapping("/loginToMain")
     public String loginToMain(ModelMap modelMap
-     ,@RequestParam(value = "account", required = false) String account){
+     ,@RequestParam(value = "account", required = false) String account) throws UnsupportedEncodingException {
         //根据用户查找所有的产品和用户ID
-
+        account= URLDecoder.decode(account,"utf-8");
         User user=customerService.findUserByAccount(account);
         List<Product> list=customerService.findProduct();
         modelMap.addAttribute("listProduct", list);
+        modelMap.addAttribute("noPermission", user.getPermission());
         return "index/loginToMain";
+    }
+
+
+
+    /**
+     * 管理员excel导入界面
+     * @param
+     * @return
+     */
+    @RequestMapping(value="/importExcel", method = RequestMethod.POST)
+    public @ResponseBody String importExcel(@RequestParam("file") MultipartFile file,
+                                          HttpServletRequest request
+            ,@RequestParam(value = "account", required = false) String account) throws UnsupportedEncodingException {
+            String contentType = file.getContentType();
+            String fileName = file.getOriginalFilename();
+            String filePath = request.getSession().getServletContext().getRealPath("imgupload/");
+            File excel=new File(filePath);
+           //根据用户查找所有的产品和用户ID
+             account= URLDecoder.decode(account,"utf-8");
+             User user=customerService.findUserByAccount(account);
+        if(("1").equals(user.getPermission())){
+            //
+            int maxId=customerService.getCollectionCount("productId",null,new Product().getClass());
+            //导入
+            List<Product> list=ImpAndExpExcel.importData(excel,maxId);
+            customerService.addProduct(list,new Product().getClass());
+
+            return "import/importInde";
+        }else{
+            return  "error/noPermission";
+        }
+
     }
 }

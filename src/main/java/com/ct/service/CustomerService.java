@@ -80,6 +80,21 @@ public interface CustomerService  {
      */
    public List<Product> findProduct();
 
+    /**
+     * 查询自增ID
+     * @param field
+     * @param value
+     * @return
+     */
+    public int getCollectionCount(String field,String value,Class cl);
+
+    /**
+     * 批量增加产品
+     * @param list
+     * @param cl
+     */
+    public void addProduct(List<Product> list,Class cl);
+
 }
 
 

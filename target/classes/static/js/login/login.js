@@ -25,7 +25,7 @@ var appLogin = function(){
                         if(data=="yes"){
                             $(".msg_container").show();
                             $(".msg_window").show();
-                           window.location.href="loginToMain?account="+$.trim($("#account").val());
+                            window.location.href=encodeURI(encodeURI("loginToMain?account="+$.trim($("#account").val())));
                         }else if(data=="no"){
                             $(".error_msg").text("*该账号不存在！");
 

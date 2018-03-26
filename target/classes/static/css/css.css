@@ -358,5 +358,5 @@ a.regist_rest_btn:active{background-image:url('../images/22.png')}
     max-height: 1.8rem;
     padding-left: 0.2rem;
     padding-right: 0.2rem;
-    overflow-y: auto;/*增加滚动条*/
+    overflow:hidden;/*增加滚动条*/
 }

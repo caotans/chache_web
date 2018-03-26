@@ -56,7 +56,7 @@ var appRegist = function () {
                                     $(".msg_container").show();
                                     $(".msg_window").show();
                                     setTimeout(function () {
-                                        window.location.href="loginToMain?account="+$.trim($("#account").val());
+                                        window.location.href=encodeURI(encodeURI("loginToMain?account="+$.trim($("#account").val())));
                                     },1000)
                                 }
                             },

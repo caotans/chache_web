@@ -10,6 +10,11 @@ import com.alibaba.fastjson.JSONArray;
 public class Product {
    public  String productName;
    public  String productPrice;
+   public  String productCurrency;
+   public  String productPrice2;
+   public  String productCurrency2;
+   public  String productPrice3;
+   public  String productCurrency3;
    public  String productUnit;
    public  String productUnit2;
    public  String productCount;
@@ -21,9 +26,14 @@ public class Product {
     public Product() {
     }
 
-    public Product(String productName, String productPrice, String productUnit, String productUnit2, String productCount, String productCount2, String productId, String remark, JSONArray imgList) {
+    public Product(String productName, String productPrice, String productCurrency, String productPrice2, String productCurrency2, String productPrice3, String productCurrency3, String productUnit, String productUnit2, String productCount, String productCount2, String productId, String remark, JSONArray imgList) {
         this.productName = productName;
         this.productPrice = productPrice;
+        this.productCurrency = productCurrency;
+        this.productPrice2 = productPrice2;
+        this.productCurrency2 = productCurrency2;
+        this.productPrice3 = productPrice3;
+        this.productCurrency3 = productCurrency3;
         this.productUnit = productUnit;
         this.productUnit2 = productUnit2;
         this.productCount = productCount;
@@ -47,6 +57,46 @@ public class Product {
 
     public void setProductPrice(String productPrice) {
         this.productPrice = productPrice;
+    }
+
+    public String getProductCurrency() {
+        return productCurrency;
+    }
+
+    public void setProductCurrency(String productCurrency) {
+        this.productCurrency = productCurrency;
+    }
+
+    public String getProductPrice2() {
+        return productPrice2;
+    }
+
+    public void setProductPrice2(String productPrice2) {
+        this.productPrice2 = productPrice2;
+    }
+
+    public String getProductCurrency2() {
+        return productCurrency2;
+    }
+
+    public void setProductCurrency2(String productCurrency2) {
+        this.productCurrency2 = productCurrency2;
+    }
+
+    public String getProductPrice3() {
+        return productPrice3;
+    }
+
+    public void setProductPrice3(String productPrice3) {
+        this.productPrice3 = productPrice3;
+    }
+
+    public String getProductCurrency3() {
+        return productCurrency3;
+    }
+
+    public void setProductCurrency3(String productCurrency3) {
+        this.productCurrency3 = productCurrency3;
     }
 
     public String getProductUnit() {
