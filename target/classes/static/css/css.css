@@ -414,13 +414,12 @@ a.regist_rest_btn:active{background-image:url('../images/22.png')}
 }
 
 .bottomBar_shopCar{
-    width: 100%;
+    width: 2rem;
     height: 1rem;
-    margin-left: -2.2rem;
-    margin-right: -2.2rem;
     background-color: lawngreen;
     background-size: 100% 100%;
     border-right: 0.01rem solid;
+    float: left;
 }
 
 .bottomBar_order{
@@ -428,7 +427,7 @@ a.regist_rest_btn:active{background-image:url('../images/22.png')}
     height: 1rem;
     background-color: gold;
     background-size: cover;
-    float: right;
+    float: left;
 }
 
 /* 我的首页*/
