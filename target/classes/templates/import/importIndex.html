@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>首页</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <link rel="stylesheet" th:href="@{../../static/css/css.css}" />
+    <script type="text/javascript" th:src="@{../../static/js/jquery-3.2.1.min.js}"></script>
+
+</head>
+<body>
+    <div class="loginContainer" th:text="${result}"></div>
+    <a  th:href="@{loginToMain(account=${account})}">回到首页</a>
+</body>
+</html>

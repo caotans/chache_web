@@ -16,9 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.net.URLDecoder;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -208,14 +208,13 @@ public class UserLoginController {
      * @return
      */
     @RequestMapping("/loginToMain")
-    public String loginToMain(ModelMap modelMap
+    public String loginToMain(ModelMap modelMap,HttpServletRequest request
      ,@RequestParam(value = "account", required = false) String account) throws UnsupportedEncodingException {
         //根据用户查找所有的产品和用户ID
         account= URLDecoder.decode(account,"utf-8");
         User user=customerService.findUserByAccount(account);
-        List<Product> list=customerService.findProduct();
-        modelMap.addAttribute("listProduct", list);
         modelMap.addAttribute("noPermission", user.getPermission());
+        request.getSession().setAttribute("account",account);
         return "index/loginToMain";
     }
 
@@ -227,27 +226,97 @@ public class UserLoginController {
      * @return
      */
     @RequestMapping(value="/importExcel", method = RequestMethod.POST)
-    public @ResponseBody String importExcel(@RequestParam("file") MultipartFile file,
-                                          HttpServletRequest request
-            ,@RequestParam(value = "account", required = false) String account) throws UnsupportedEncodingException {
-            String contentType = file.getContentType();
-            String fileName = file.getOriginalFilename();
-            String filePath = request.getSession().getServletContext().getRealPath("imgupload/");
-            File excel=new File(filePath);
-           //根据用户查找所有的产品和用户ID
-             account= URLDecoder.decode(account,"utf-8");
-             User user=customerService.findUserByAccount(account);
-        if(("1").equals(user.getPermission())){
+    public  String importExcel(@RequestParam("file") MultipartFile file,
+                                          HttpServletRequest request,ModelMap modelMap
+           ) throws Exception {
+        String result="error/error";
+        String contentType = file.getContentType();
+        String fileName = file.getOriginalFilename();
+        //根据用户查找所有的产品和用户ID
+        String account = request.getSession().getAttribute("account").toString();
+        account = URLDecoder.decode(account, "utf-8");
+        modelMap.put("account",account);
+        User user = customerService.findUserByAccount(account);
+        if (("1").equals(user.getPermission())) {
             //
-            int maxId=customerService.getCollectionCount("productId",null,new Product().getClass());
+            int maxId = customerService.getCollectionCount("productId", null, new Product().getClass());
             //导入
-            List<Product> list=ImpAndExpExcel.importData(excel,maxId);
-            customerService.addProduct(list,new Product().getClass());
+            File uploadDir = new File(ImpAndExpExcel.uploadPath);
+            //创建一个目录 （它的路径名由当前 File 对象指定，包括任一必须的父路径。）
+            if (!uploadDir.exists()) uploadDir.mkdirs();
+            //新建一个文件
+            File tempFile = new File(ImpAndExpExcel.uploadPath + new Date().getTime() + "_" + fileName + ".xlsx");
+            //初始化输入流
+            InputStream is = null;
+            try {
+                //将上传的文件写入新建的文件中
+                file.transferTo(tempFile);
+                //根据新建的文件实例化输入流
+                is = new FileInputStream(tempFile);
 
-            return "import/importInde";
-        }else{
-            return  "error/noPermission";
+                //根据版本选择创建Workbook的方式
+                List<Product> list = ImpAndExpExcel.importData(tempFile, maxId);
+                if(list!=null&&list.size()>0){
+                        if("error".equals(list.get(0).getProductName())){
+                            modelMap.put("result",list.get(0).getRemark());
+                        }else{
+                            customerService.addProduct(list, new Product().getClass());
+                            modelMap.put("result","导入成功!");
+                        }
+
+                }
+                result= "import/importIndex";
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (is != null) {
+                    try {
+                        is.close();
+                    } catch (IOException e) {
+                        is = null;
+                        e.printStackTrace();
+                    }
+                }
+            }
+
         }
+        return result;
+    }
 
+    /**
+     * 登录到产品首页
+     * @param modelMap
+     * @return
+     */
+    @RequestMapping("/myIndex")
+    public String myIndex(ModelMap modelMap,HttpServletRequest reques) throws UnsupportedEncodingException {
+        //根据用户查找所有的产品和用户ID
+        List<Product> list=customerService.findProduct();
+        modelMap.addAttribute("listProduct", list);
+        return "index/myIndex";
+    }
+    /**
+     * 登录到我的购物车
+     * @param modelMap
+     * @return
+     */
+    @RequestMapping("/myShopCar")
+    public String myShopCar(ModelMap modelMap,HttpServletRequest reques) throws UnsupportedEncodingException {
+        //根据用户查找所有的产品和用户ID
+        List<Product> list=customerService.findProduct();
+        modelMap.addAttribute("listProduct", list);
+        return "index/myShopCar";
+    }
+    /**
+     * 登录到我的订单
+     * @param modelMap
+     * @return
+     */
+    @RequestMapping("/myOrder")
+    public String myOrder(ModelMap modelMap,HttpServletRequest reques) throws UnsupportedEncodingException {
+        //根据用户查找所有的产品和用户ID
+        List<Product> list=customerService.findProduct();
+        modelMap.addAttribute("listProduct", list);
+        return "index/myOrder";
     }
 }

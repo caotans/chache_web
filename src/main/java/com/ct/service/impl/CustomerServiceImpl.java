@@ -114,6 +114,7 @@ public class CustomerServiceImpl implements CustomerService {
     //代购的代码**********************************************************************************************
     public void regist_start(JSONObject object,String table){
         object.put("permission","0");//一般人都是普通权限
+        object.put("registTime",new Date());//一般人都是普通权限
         mongoTemplate.insert(object,table);
     }
 

@@ -1,6 +1,7 @@
 package com.ct.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class User implements Serializable{
 
@@ -9,16 +10,18 @@ public class User implements Serializable{
     public String name;
     public String phone;
     public String  permission;
+    public Date registTime;
 
     public User() {
     }
 
-    public User(String account, String mima, String name, String phone, String permission) {
+    public User(String account, String mima, String name, String phone, String permission, Date registTime) {
         this.account = account;
         this.mima = mima;
         this.name = name;
         this.phone = phone;
         this.permission = permission;
+        this.registTime = registTime;
     }
 
     public String getAccount() {
@@ -59,5 +62,13 @@ public class User implements Serializable{
 
     public void setPermission(String permission) {
         this.permission = permission;
+    }
+
+    public Date getRegistTime() {
+        return registTime;
+    }
+
+    public void setRegistTime(Date registTime) {
+        this.registTime = registTime;
     }
 }

@@ -346,6 +346,21 @@ a.regist_rest_btn:active{background-image:url('../images/22.png')}
 
 
 /*加载进度*/
+.msg_window3{
+    position: fixed;
+    margin:auto;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    width: 3.75rem;
+    height:2rem;
+    border: 0.01rem solid;
+    border-color: #fff;
+    z-index: 1001;
+    background-color: white;
+    text-align: center;
+}
 .loading{
   width: 1.8rem;
     height: 1.5rem;
@@ -359,4 +374,66 @@ a.regist_rest_btn:active{background-image:url('../images/22.png')}
     padding-left: 0.2rem;
     padding-right: 0.2rem;
     overflow:hidden;/*增加滚动条*/
+}
+
+/*网站主页*/
+#mainContent{
+    width: 100%;
+    min-height: 6rem;
+    overflow-y: auto;
+    /*overflow-x:hidden;*/
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    align-content: center;
+    text-align: center;
+    border: 1px solid;
+}
+.bottomBar{
+    width: 6.5rem;
+    height: 1rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border: 1px solid;
+    text-align: center;
+}
+
+.bottomBar_index{
+    width: 2.2rem;
+     height: 1rem;
+    float: left;
+    background-color: #18222c;
+    background-size: 100% 100%;
+    border-right: 0.01rem solid;
+
+}
+
+.bottomBar_shopCar{
+    width: 100%;
+    height: 1rem;
+    margin-left: -2.2rem;
+    margin-right: -2.2rem;
+    background-color: lawngreen;
+    background-size: 100% 100%;
+    border-right: 0.01rem solid;
+}
+
+.bottomBar_order{
+    width: 2.2rem;
+    height: 1rem;
+    background-color: gold;
+    background-size: cover;
+    float: right;
+}
+
+/* 我的首页*/
+.myIndexContainer{
+    width: 6.5rem;
+    height: 6rem;
+border: 1px solid;
 }

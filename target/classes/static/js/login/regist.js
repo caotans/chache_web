@@ -53,8 +53,7 @@ var appRegist = function () {
                             url: "regist_start",
                             success: function (data) {
                                 if(data==1){
-                                    $(".msg_container").show();
-                                    $(".msg_window").show();
+                                    util.showDialog("info","注册成功,正在跳转到首页...");
                                     setTimeout(function () {
                                         window.location.href=encodeURI(encodeURI("loginToMain?account="+$.trim($("#account").val())));
                                     },1000)
