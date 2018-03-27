@@ -1,6 +1,6 @@
-$(window).resize(function() {
-   window.location.reload();
-});
+// $(window).resize(function() {
+//    window.location.reload();
+// });
 var util=function () {
     return {
         showDialog:function (type,param) {

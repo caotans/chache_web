@@ -4,6 +4,7 @@
 <head>
     <title>首页</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="no" />
     <link rel="stylesheet" th:href="@{../../static/css/css.css}" />
     <link rel="stylesheet" th:href="@{../../static/css/swipeslider.css}" />
     <script type="text/javascript" th:src="@{../../static/js/jquery-3.2.1.min.js}"></script>
@@ -17,9 +18,30 @@
     </script>
 </head>
 <body>
+<div class="section">
+    <!-- 分类-->
+    <div class="classify" style="background-image: url('../../static/images/menu6.png')"></div>
+    <!-- 具体的明细-->
     <div class="myIndexContainer">
-dsfsdfsdffsd
+        <div class="productItem">
+            <div class="product_title"><img src="../../static/images/timg.jpg"/></div>
+            <div class="product_name largeFont">dsfdsfsd</div>
+            <div class="product_remark remarkFont">fsdfsdfsdfsd</div>
+        </div>
+        <div class="productItem">
+            <div class="product_title"><img src="../../static/images/timg.jpg"/></div>
+            <div class="product_name largeFont">巴黎圣罗兰口红</div>
+            <div class="product_remark remarkFont">收到甲方可费劲考虑的成绩哦问看厄特瑞特瑞特瑞特瑞特瑞特热人特记录方式看大佛空位控普文覅jkldfgjk就离开对方更加开朗大方国家发动开了个积分的发动快攻即将高考零分的结果看了东方国际看我厄普覅可破覅为</div>
+        </div>
+        <div class="productItem">
+            <div class="product_title"><img src="../../static/images/timg.jpg"/></div>
+            <div class="product_name largeFont">巴黎圣罗兰口红</div>
+            <div class="product_remark remarkFont">收到甲方可费劲考虑的成绩哦问看厄特瑞特瑞特瑞特瑞特瑞特热人特记录方式看大佛空位控普文覅jkldfgjk就离开对方更加开朗大方国家发动开了个积分的发动快攻即将高考零分的结果看了东方国际看我厄普覅可破覅为</div>
+        </div>
     </div>
+</div>
+
+
     <!-- 弹出层-->
     <div th:include="common/common :: dialog"></div>
 </body>

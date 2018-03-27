@@ -24,7 +24,10 @@
         font-size: 16px;
     }
     .largeFont{
-        font-size: 18px;
+        font-size: 24px;
+    }
+    .remarkFont{
+        font-size:14px;
     }
 
 }
@@ -56,6 +59,9 @@
     .largeFont{
         font-size: 24px;
     }
+    .remarkFont{
+        font-size:14px;
+    }
 }
 /** iPhone **/
 @media only screen and (min-width: 320px) and (max-width: 767px) {
@@ -84,6 +90,9 @@
     }
     .largeFont{
         font-size: 16px;
+    }
+    .remarkFont{
+        font-size:10px;
     }
 }
 
@@ -388,8 +397,9 @@ a.regist_rest_btn:active{background-image:url('../images/22.png')}
     align-items: center;
     justify-items: center;
     align-content: center;
-    text-align: center;
-    border: 1px solid;
+    margin-bottom: 2rem;
+
+
 }
 .bottomBar{
     width: 6.5rem;
@@ -404,35 +414,71 @@ a.regist_rest_btn:active{background-image:url('../images/22.png')}
 }
 
 .bottomBar_index{
+    position: absolute;
     width: 2.2rem;
      height: 1rem;
-    float: left;
-    background-color: #18222c;
+    background-image:url("../images/index.png");
     background-size: 100% 100%;
     border-right: 0.01rem solid;
 
 }
 
 .bottomBar_shopCar{
-    width: 2rem;
+    position: absolute;
+    width: 2.1rem;
     height: 1rem;
-    background-color: lawngreen;
+    background-image:url("../images/shopCar.png");
     background-size: 100% 100%;
     border-right: 0.01rem solid;
-    float: left;
+    margin-left: 2.20rem;
 }
 
 .bottomBar_order{
+    position: absolute;
+    background-image:url("../images/order.png");
     width: 2.2rem;
     height: 1rem;
-    background-color: gold;
-    background-size: cover;
-    float: left;
+    background-size: 100% 100%;
+    margin-left: 4.30rem;
+
 }
 
 /* 我的首页*/
+.section{
+
+}
 .myIndexContainer{
     width: 6.5rem;
-    height: 6rem;
-border: 1px solid;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+}
+
+.classify{
+    width: 100%;
+    height: 1rem;
+    background-size: 100% 100%;
+}
+.productItem{
+    width: 3rem;
+    height: 3.7rem;
+    padding: 0.05rem 0.05rem;
+    border: 0.01rem solid;
+    overflow-y:auto;
+    margin-bottom: 0.2rem;
+
+}
+.product_title img{
+    width: 100%;
+    height: 2.7rem;
+}
+.product_name{
+    color: #18222c;
+}
+.product_remark{
+    color: #a9a9a9;
+
 }
