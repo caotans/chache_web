@@ -7,6 +7,7 @@ import com.ct.entity.QuestionInfo;
 import com.ct.entity.User;
 import com.ct.entity.UserLoginInfo;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface CustomerService  {
@@ -78,7 +79,7 @@ public interface CustomerService  {
      * 查询所有产品
      * @return
      */
-   public List<Product> findProduct();
+   public  List<HashMap<String,Object>> findProduct();
 
     /**
      * 查询自增ID
@@ -94,6 +95,14 @@ public interface CustomerService  {
      * @param cl
      */
     public void addProduct(List<Product> list,Class cl);
+
+    /**
+     * 根据产品ID查找单个产品明细
+     * @param findOneProduct
+     * @return
+     */
+
+    public Product findOneProduct(String findOneProduct);
 
 }
 

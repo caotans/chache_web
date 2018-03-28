@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLDecoder;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -291,7 +292,7 @@ public class UserLoginController {
     @RequestMapping("/myIndex")
     public String myIndex(ModelMap modelMap,HttpServletRequest reques) throws UnsupportedEncodingException {
         //根据用户查找所有的产品和用户ID
-        List<Product> list=customerService.findProduct();
+        List<HashMap<String,Object>>list=customerService.findProduct();
         modelMap.addAttribute("listProduct", list);
         return "index/myIndex";
     }
@@ -303,7 +304,7 @@ public class UserLoginController {
     @RequestMapping("/myShopCar")
     public String myShopCar(ModelMap modelMap,HttpServletRequest reques) throws UnsupportedEncodingException {
         //根据用户查找所有的产品和用户ID
-        List<Product> list=customerService.findProduct();
+        List<HashMap<String,Object>>list=customerService.findProduct();
         modelMap.addAttribute("listProduct", list);
         return "index/myShopCar";
     }
@@ -315,8 +316,31 @@ public class UserLoginController {
     @RequestMapping("/myOrder")
     public String myOrder(ModelMap modelMap,HttpServletRequest reques) throws UnsupportedEncodingException {
         //根据用户查找所有的产品和用户ID
-        List<Product> list=customerService.findProduct();
+        List<HashMap<String,Object>>list=customerService.findProduct();
         modelMap.addAttribute("listProduct", list);
         return "index/myOrder";
     }
+
+    /**
+     *
+     *查找单个产品的详细信息
+     * @param request
+     * @param response
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/findOneProduct", method = RequestMethod.POST)
+    @ResponseBody
+    public Product  findOneProduct(HttpServletRequest request,HttpServletResponse response,@RequestParam(value = "productId", required = false) String productId) {
+        Product product=null;
+        try {
+            product = customerService.findOneProduct(productId);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error(e.getMessage());
+        }
+        return product;
+    }
+
 }

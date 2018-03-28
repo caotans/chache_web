@@ -2,12 +2,14 @@ package com.ct.entity;
 
 import com.alibaba.fastjson.JSONArray;
 
+import java.io.Serializable;
+
 /**
  * @Author:ct
  * @Date:2018-3-26,17:35
  * @Description:
  */
-public class Product {
+public class Product implements Serializable{
    public  String productName;
    public  String productPrice;
    public  String productCurrency;
@@ -22,11 +24,13 @@ public class Product {
    public  String productId;
    public  String remark;
    public JSONArray imgList;
+    public  String classifyType;
+    public  String classifyName;
 
     public Product() {
     }
 
-    public Product(String productName, String productPrice, String productCurrency, String productPrice2, String productCurrency2, String productPrice3, String productCurrency3, String productUnit, String productUnit2, String productCount, String productCount2, String productId, String remark, JSONArray imgList) {
+    public Product(String productName, String productPrice, String productCurrency, String productPrice2, String productCurrency2, String productPrice3, String productCurrency3, String productUnit, String productUnit2, String productCount, String productCount2, String productId, String remark, JSONArray imgList, String classifyType, String classifyName) {
         this.productName = productName;
         this.productPrice = productPrice;
         this.productCurrency = productCurrency;
@@ -41,6 +45,8 @@ public class Product {
         this.productId = productId;
         this.remark = remark;
         this.imgList = imgList;
+        this.classifyType = classifyType;
+        this.classifyName = classifyName;
     }
 
     public String getProductName() {
@@ -153,5 +159,21 @@ public class Product {
 
     public void setImgList(JSONArray imgList) {
         this.imgList = imgList;
+    }
+
+    public String getClassifyType() {
+        return classifyType;
+    }
+
+    public void setClassifyType(String classifyType) {
+        this.classifyType = classifyType;
+    }
+
+    public String getClassifyName() {
+        return classifyName;
+    }
+
+    public void setClassifyName(String classifyName) {
+        this.classifyName = classifyName;
     }
 }

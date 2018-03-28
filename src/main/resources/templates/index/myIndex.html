@@ -18,28 +18,43 @@
     </script>
 </head>
 <body>
-<div class="section">
+<div class="section" th:each="list,listStat:${listProduct}">
     <!-- 分类-->
-    <div class="classify" style="background-image: url('../../static/images/menu6.png')"></div>
+    <div class="classify">
+        <h3 class="floor_tit" th:text="${list.classifyName}"></h3>
+    </div>
     <!-- 具体的明细-->
     <div class="myIndexContainer">
-        <div class="productItem">
-            <div class="product_title"><img src="../../static/images/timg.jpg"/></div>
-            <div class="product_name largeFont">dsfdsfsd</div>
-            <div class="product_remark remarkFont">fsdfsdfsdfsd</div>
+        <div class="productItem" th:each="smallList,smallListStat:${list.childList}">
+            <div class="product_title" th:onclick="'javascript:myIndex.showProduct(\''+${smallList.productId}+'\');'"><img th:attrappend="src=${smallList.imgList.get(0)}" /></div>
+            <div class="product_name largeFont" th:text="${smallList.productName}"></div>
+            <div class="product_remark remarkFont" th:text="${smallList.remark}"></div>
         </div>
-        <div class="productItem">
-            <div class="product_title"><img src="../../static/images/timg.jpg"/></div>
-            <div class="product_name largeFont">巴黎圣罗兰口红</div>
-            <div class="product_remark remarkFont">收到甲方可费劲考虑的成绩哦问看厄特瑞特瑞特瑞特瑞特瑞特热人特记录方式看大佛空位控普文覅jkldfgjk就离开对方更加开朗大方国家发动开了个积分的发动快攻即将高考零分的结果看了东方国际看我厄普覅可破覅为</div>
-        </div>
-        <div class="productItem">
-            <div class="product_title"><img src="../../static/images/timg.jpg"/></div>
-            <div class="product_name largeFont">巴黎圣罗兰口红</div>
-            <div class="product_remark remarkFont">收到甲方可费劲考虑的成绩哦问看厄特瑞特瑞特瑞特瑞特瑞特热人特记录方式看大佛空位控普文覅jkldfgjk就离开对方更加开朗大方国家发动开了个积分的发动快攻即将高考零分的结果看了东方国际看我厄普覅可破覅为</div>
-        </div>
+
     </div>
 </div>
+<!--<div class="section">-->
+    <!--&lt;!&ndash; 分类&ndash;&gt;-->
+    <!--<div class="classify"  style="background-image: url('../../static/images/menu6.png')"></div>-->
+    <!--&lt;!&ndash; 具体的明细&ndash;&gt;-->
+    <!--<div class="myIndexContainer">-->
+        <!--<div class="productItem">-->
+            <!--<div class="product_title"><img src="../../static/images/timg.jpg"/></div>-->
+            <!--<div class="product_name largeFont">dsfdsfsd</div>-->
+            <!--<div class="product_remark remarkFont">fsdfsdfsdfsd</div>-->
+        <!--</div>-->
+        <!--<div class="productItem">-->
+            <!--<div class="product_title"><img src="../../static/images/timg.jpg"/></div>-->
+            <!--<div class="product_name largeFont">巴黎圣罗兰口红</div>-->
+            <!--<div class="product_remark remarkFont">收到甲方可费劲考虑的成绩哦问看厄特瑞特瑞特瑞特瑞特瑞特热人特记录方式看大佛空位控普文覅jkldfgjk就离开对方更加开朗大方国家发动开了个积分的发动快攻即将高考零分的结果看了东方国际看我厄普覅可破覅为</div>-->
+        <!--</div>-->
+        <!--<div class="productItem">-->
+            <!--<div class="product_title"><img src="../../static/images/timg.jpg"/></div>-->
+            <!--<div class="product_name largeFont">巴黎圣罗兰口红</div>-->
+            <!--<div class="product_remark remarkFont">收到甲方可费劲考虑的成绩哦问看厄特瑞特瑞特瑞特瑞特瑞特热人特记录方式看大佛空位控普文覅jkldfgjk就离开对方更加开朗大方国家发动开了个积分的发动快攻即将高考零分的结果看了东方国际看我厄普覅可破覅为</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
 
 
     <!-- 弹出层-->

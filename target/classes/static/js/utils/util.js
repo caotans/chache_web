@@ -11,7 +11,14 @@ var util=function () {
             }else if(type=="product"){
                 $(".msg_window2").show();
                 var html="";
+                  for(var i=0;i<param.imgList.length;i++){
+                        html+="<li class='sw-slide'>";
+                        html+="<img src='"+param.imgList[i]+"' />";
+                        html+="</li>";
+                  }
                 $(".sw-slides").html(html);
+                $(".product_name").text(param.productName);
+                $(".product_remark").text(param.remark);
             }else if(type=="loading"){
                 $(".msg_window3").show();
             }
@@ -35,7 +42,7 @@ var util=function () {
                 document.documentElement.style.fontSize = screenWidth;
             }
 
-            $('#full_feature').swipeslider();
+
         }
     }
 

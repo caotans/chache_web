@@ -9,39 +9,53 @@
 var appLogin = function(){
     return {
         init : function(){
+            $(document).keyup(function(event){
+                if(event.keyCode ==13){
+                    appLogin.login();
+                    return false;
+                }
+            });
            $(".login_btn_regist").bind("click",function(){
               window.location.href="regist";
            });
             $(".login_btn_login").bind("click",function(){
-                $.ajax({
-                    type: "POST",
-                    dataType: "text",
-                    headers : {
-                        'Content-Type' : 'application/json;charset=utf-8'
-                    },
-                    data: JSON.stringify({"account":$.trim($("#account").val()),"mima":hex_md5($.trim($("#mima").val()))}),
-                    url: "jumpToMain",
-                    success: function (data) {
-                        if(data=="yes"){
-                           util.showDialog("loading");
-                            window.location.href=encodeURI(encodeURI("loginToMain?account="+$.trim($("#account").val())));
-                        }else if(data=="no"){
-                            $(".error_msg").text("*该账号不存在！");
-
-                        }else if(data=="mid"){
-                            $(".error_msg").text("*用户名或者密码不正确！");
-                        }
-                    },
-                    error: function () {
-
-                    }
-
-                });
+                   appLogin.login();
             });
 
         },
-        changeLi : function(liid,PriceDownload){
+        login : function(){
+            if(!$("#account").val()){
+                $(".error_msg").text("*账号不能为空！");
+                return;
+            }
+            if(!$("#mima").val()){
+                $(".error_msg").text("*密码不能为空！");
+                return;
+            }
+            $.ajax({
+                type: "POST",
+                dataType: "text",
+                headers : {
+                    'Content-Type' : 'application/json;charset=utf-8'
+                },
+                data: JSON.stringify({"account":$.trim($("#account").val()),"mima":hex_md5($.trim($("#mima").val()))}),
+                url: "jumpToMain",
+                success: function (data) {
+                    if(data=="yes"){
+                        util.showDialog("loading");
+                        window.location.href=encodeURI(encodeURI("loginToMain?account="+$.trim($("#account").val())));
+                    }else if(data=="no"){
+                        $(".error_msg").text("*该账号不存在！");
 
+                    }else if(data=="mid"){
+                        $(".error_msg").text("*用户名或者密码不正确！");
+                    }
+                },
+                error: function () {
+
+                }
+
+            });
         }
 
     }

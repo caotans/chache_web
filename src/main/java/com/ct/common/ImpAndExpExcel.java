@@ -198,6 +198,22 @@ public class ImpAndExpExcel {
                                 rowMessage += "图片的字数不能超过50；";
                             }
                             product.setImgList(jsonArray);
+                        }else if (c == 14) {
+                            String classifyType = cell.getStringCellValue();//获取第i行的索引为0的单元格数据
+                            if (StringUtils.isEmpty(classifyType)) {
+                                rowMessage += "备注不能为空；";
+                            } else if (classifyType.length() > 1000) {
+                                rowMessage += "备注的字数不能超过50；";
+                            }
+                            product.setClassifyType(classifyType);
+                        }else if (c == 15) {
+                            String classifyName = cell.getStringCellValue();//获取第i行的索引为0的单元格数据
+                            if (StringUtils.isEmpty(classifyName)) {
+                                rowMessage += "分类不能为空；";
+                            } else if (classifyName.length() > 5) {
+                                rowMessage += "分类的字数不能超过5；";
+                            }
+                            product.setClassifyName(classifyName);
                         }
                     } else {
                         rowMessage += "第" + (c + 1) + "列数据有问题，请仔细检查；";

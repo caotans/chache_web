@@ -12,16 +12,14 @@
     <script type="text/javascript" th:src="@{../../static/js/swipeslider.js}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            var noPermission=$("#noPermission").val();
-            if(noPermission==0){
                 appMain.changePage("myIndex");
-            }
+
         });
     </script>
 </head>
-<body>
+<body style="padding-bottom: 2rem">
 <input type="hidden" th:value="${noPermission}" id="noPermission"/>
-    <div class="loginContainer" th:if="${noPermission}=='1'">
+    <div class="importContainer" th:if="${noPermission}=='1'">
         <!-- 导入excel功能-->
         <form  enctype="multipart/form-data" method="post"  th:action="@{importExcel}">
             <table width="100%" border="1rem">
@@ -33,7 +31,7 @@
         </form>
     </div>
     <!--普通会员 -->
-    <div th:if="${noPermission}=='0'" id="mainContent">
+    <div id="mainContent">
 
     </div>
     <div class="bottomBar">

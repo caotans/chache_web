@@ -2,6 +2,7 @@ package com.ct.service.impl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.ct.common.JsonExchange;
 import com.ct.dao.CustomerRepository;
 import com.ct.entity.*;
 import com.ct.entity.UserLoginInfo;
@@ -15,10 +16,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -174,8 +172,22 @@ public class CustomerServiceImpl implements CustomerService {
      * 查询所有产品
      * @return
      */
-    public List<Product> findProduct(){
-       List<Product> list=mongoTemplate.findAll(Product.class);
+    public   List<HashMap<String,Object>> findProduct(){
+        List<HashMap<String,Object>> list=new ArrayList<HashMap<String, Object>>();
+       List< ClassifyDic> classifyDic=mongoTemplate.findAll(ClassifyDic.class);
+
+       for(ClassifyDic obj:classifyDic){
+           HashMap<String,Object> map=new HashMap<String, Object>();
+           Query query=new Query();
+           Criteria criteria=Criteria.where("classifyType").is(obj.getClsssifyType());
+           query.addCriteria(criteria);
+           List<Product> childList=mongoTemplate.find(query,Product.class);
+           map.put("classifyName",obj.getClassifyName());
+           map.put("classifyType",obj.getClsssifyType());
+           map.put("childList",childList);
+           list.add(map);
+       }
+
         return list;
     }
 
@@ -204,5 +216,19 @@ public class CustomerServiceImpl implements CustomerService {
             mongoTemplate.insert(list.get(i));
         }
 
+    }
+
+    /**
+     * 根据产品ID查找单个产品明细
+     * @param findOneProduct
+     * @return
+     */
+
+    public Product findOneProduct(String findOneProduct){
+        Query query=new Query();
+        Criteria criteria=Criteria.where("productId").is(findOneProduct);
+        query.addCriteria(criteria);
+        Product product= mongoTemplate.findOne(query,Product.class);
+        return product;
     }
 }
