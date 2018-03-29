@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 </head>
 <body>
     <div th:fragment="dialog">
@@ -32,34 +32,33 @@
                     </figure>
                 </section>
                 <div class="product_name largeFont"></div>
-                <div class="product_remark remarkFont"></div>
+                <div class="product_remark2 remarkFont"></div>
                 <div class="product_account">
                     <div class="left_s">
-                        数量：<label>1</label><span>件</span>
+                        数量：<input type="text"  class="count_size"  id="product_account_obj" disabled="true" value="0"/><span></span>
                     </div>
                     <div class="right_s">
-                        库存：<label>1</label><span>件</span>
+                        库存：<label id="product_account_rep">0</label><label></label>
                     </div>
 
                 </div>
                 <div>
-                    <input  class="product_range" type="range" min="0" max="100" value="70"/>
+                    <input  class="product_range" id="product_range_account" oninput="util.addCount('product_account',this)" type="range" min="0" max="100" value="0" />
                 </div>
                 <div class="product_assembly">
                     <div class="left_s">
-                        拼单数量：<label>1</label><span>只</span>
+                        拼单数量：<input type="text" class="count_size" disabled="true" id="product_assembly_obj" value="0" /><span></span>
                     </div>
                     <div class="right_s">
-                        拼单库存：<label>1</label><span>只</span>
+                        拼单库存：<label id="product_assembly_rep">0</label><label></label>
                     </div>
-
                 </div>
                 <div>
-                    <input  class="product_range" type="range" min="0" max="100" value="70"/>
+                    <input  class="product_range" id="product_assembly_account" oninput="util.addCount('product_assembly',this)" type="range" min="0" max="100" value="0"/>
                 </div>
             </div>
             <div class="msg_footer2">
-                <button class="padding_btn largeFont">取消</button>
+                <button class="padding_btn largeFont" onclick="util.cancel()">取消</button>
                 <button class="largeFont">确定</button>
             </div>
         </div>

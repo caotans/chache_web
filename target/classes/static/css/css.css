@@ -304,7 +304,7 @@ a.regist_rest_btn:active{background-image:url('../images/22.png')}
     top:0;
     bottom:0;
     width: 6rem;
-    height: 8rem;
+    height: 8.3rem;
     border: 0.01rem solid;
     border-color: #fff;
     z-index: 1001;
@@ -326,7 +326,7 @@ a.regist_rest_btn:active{background-image:url('../images/22.png')}
     text-align: left;
     margin-top: 0.1rem;
     width: auto;
-    height:6.5rem;
+    height:6.8rem;
     padding-left: 0.2rem;
     padding-right: 0.2rem;
     overflow-y: auto;/*增加滚动条*/
@@ -337,7 +337,7 @@ a.regist_rest_btn:active{background-image:url('../images/22.png')}
 .msg_footer2{
     margin-top: 0.1rem;
     width: auto;
-    height: 0.2rem;
+    height: 0.1rem;
 }
 .msg_footer2 button{
     width: 1.5rem;
@@ -390,6 +390,7 @@ a.regist_rest_btn:active{background-image:url('../images/22.png')}
     width: 100%;
     min-height: 6rem;
     overflow-y: auto;
+    overflow-x: hidden;
     /*overflow-x:hidden;*/
     display: flex;
     flex-flow: column nowrap;
@@ -402,7 +403,7 @@ a.regist_rest_btn:active{background-image:url('../images/22.png')}
 
 }
 .bottomBar{
-    width: 6.5rem;
+    width: 6rem;
     height: 1rem;
     position: fixed;
     bottom: 0;
@@ -415,7 +416,7 @@ a.regist_rest_btn:active{background-image:url('../images/22.png')}
 
 .bottomBar_index{
     position: absolute;
-    width: 2.2rem;
+    width: 1.94rem;
      height: 1rem;
     background-image:url("../images/index.png");
     background-size: 100% 100%;
@@ -425,21 +426,21 @@ a.regist_rest_btn:active{background-image:url('../images/22.png')}
 
 .bottomBar_shopCar{
     position: absolute;
-    width: 2.1rem;
+    width: 1.94rem;
     height: 1rem;
     background-image:url("../images/shopCar.png");
     background-size: 100% 100%;
     border-right: 0.01rem solid;
-    margin-left: 2.20rem;
+    margin-left: 1.95rem;
 }
 
 .bottomBar_order{
     position: absolute;
     background-image:url("../images/order.png");
-    width: 2.2rem;
+    width: 2.1rem;
     height: 1rem;
     background-size: 100% 100%;
-    margin-left: 4.30rem;
+    margin-left: 3.9rem;
 
 }
 
@@ -458,12 +459,12 @@ a.regist_rest_btn:active{background-image:url('../images/22.png')}
 
 }
 .myIndexContainer{
-    width: 6.5rem;
+    width: 6.0rem;
     height: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 
 }
 
@@ -492,6 +493,15 @@ a.regist_rest_btn:active{background-image:url('../images/22.png')}
 .product_remark{
     margin-top: 0.02rem;
     color: #a9a9a9;
+    height: 0.6rem;
+    overflow: hidden;
+
+}
+.product_remark2{
+    margin-top: 0.02rem;
+    color: #a9a9a9;
+    height: 0.6rem;
+    overflow: hidden;
 
 }
 /*产品标题*/
@@ -504,7 +514,7 @@ a.regist_rest_btn:active{background-image:url('../images/22.png')}
     text-align: center;
     padding: 0 0.6rem;
     margin: 0 auto 0.20rem;
-    overflow: hidden;
+    overflow-y: hidden;
     color: #222;
 }
 
@@ -526,7 +536,8 @@ a.regist_rest_btn:active{background-image:url('../images/22.png')}
 
 /*产品详情*/
 .product_account{
-    margin-top: 0.8rem;
+    margin-top: 0.2rem;
+    height: 0.02rem;
 }
 .left_s{
 float: left;
@@ -540,6 +551,12 @@ float: right;
 }
 .product_assembly{
     margin-top: 0.2rem;
+    height: 0.02rem;
+}
+.count_size{
+    width: 0.2rem;
+    height: 0.2rem;
+
 }
 input[type="range"] {
     -webkit-box-shadow: 0 0.01rem 0 0px #777, 0 0.01rem 0 #777 inset, 0rem 0.02rem 0.1rem 0rem #777 inset, 0.01rem 0rem 0.02rem rgba(0, 0, 0, 0.4) inset, 0 0rem 0.01rem rgba(0, 0, 0, 0.6) inset;

@@ -4,7 +4,6 @@
 <head>
     <title>首页</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <meta name="apple-mobile-web-app-capable" content="no" />
     <link rel="stylesheet" th:href="@{../../static/css/css.css}" />
     <link rel="stylesheet" th:href="@{../../static/css/swipeslider.css}" />
     <script type="text/javascript" th:src="@{../../static/js/jquery-3.2.1.min.js}"></script>
@@ -21,7 +20,7 @@
 <div class="section" th:each="list,listStat:${listProduct}">
     <!-- 分类-->
     <div class="classify">
-        <h3 class="floor_tit" th:text="${list.classifyName}"></h3>
+        <h3 class="floor_tit largeFont" th:text="${list.classifyName}"></h3>
     </div>
     <!-- 具体的明细-->
     <div class="myIndexContainer">

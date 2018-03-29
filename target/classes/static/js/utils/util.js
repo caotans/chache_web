@@ -18,7 +18,22 @@ var util=function () {
                   }
                 $(".sw-slides").html(html);
                 $(".product_name").text(param.productName);
-                $(".product_remark").text(param.remark);
+                $(".product_remark2").text(param.remark);
+                //数量
+                $("#product_account_obj").val(0);
+                $("#product_account_obj").next().text(param.productUnit);
+                $("#product_account_rep").text(param.productCount);
+                $("#product_account_rep").next().text(param.productUnit);
+                $("#product_range_account").attr("max",param.productCount);
+                //库存
+                $("#product_assembly_obj").val(0);
+                $("#product_assembly_obj").next().text(param.productUnit2);
+                $("#product_assembly_rep").text(param.productCount2);
+                $("#product_assembly_rep").next().text(param.productUnit2);
+                $("#product_assembly_rep").next().text(param.productUnit2);
+                $("#product_assembly_account").attr("max",param.productCount2);
+
+
             }else if(type=="loading"){
                 $(".msg_window3").show();
             }
@@ -43,6 +58,35 @@ var util=function () {
             }
 
 
+        },
+        //滑块事件
+        addCount:function (obj,thisObj) {
+            var value=$(thisObj).val();
+            var min=$(thisObj).attr("min");
+            var max=$(thisObj).attr("max");
+            $("#"+obj+"_obj").val(value);
+            $("#"+obj+"_rep").text(max-value);
+        },
+        //取消订单
+        cancel:function () {
+            this.hideDialog("product");
+            //重置
+            $(".sw-slides").html("");
+            $(".product_name").text("");
+            $(".product_remark2").text("");
+            //数量
+            $("#product_account_obj").val(0);
+            $("#product_account_obj").next().text("");
+            $("#product_account_rep").text("");
+            $("#product_account_rep").next().text("");
+            $("#product_range_account").attr("max","0");
+            //库存
+            $("#product_assembly_obj").val(0);
+            $("#product_assembly_obj").next().text("");
+            $("#product_assembly_rep").text("");
+            $("#product_assembly_rep").next().text("");
+            $("#product_assembly_rep").next().text("");
+            $("#product_assembly_account").attr("max","0");
         }
     }
 
