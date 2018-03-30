@@ -33,7 +33,7 @@ var util=function () {
                 $("#product_assembly_rep").next().text(param.productUnit2);
                 $("#product_assembly_account").attr("max",param.productCount2);
 
-
+                $("#productId").val(param.productId);
             }else if(type=="loading"){
                 $(".msg_window3").show();
             }
@@ -61,9 +61,21 @@ var util=function () {
         },
         //滑块事件
         addCount:function (obj,thisObj) {
-            var value=$(thisObj).val();
             var min=$(thisObj).attr("min");
             var max=$(thisObj).attr("max");
+            var value=$(thisObj).val();
+            if(obj=="product_account"){
+                var origin=$("#product_assembly_account").attr("max");
+                $("#product_assembly_obj").val("0");
+                $("#product_assembly_account").val("0");
+                $("#product_assembly_rep").text(origin);
+            }
+            if(obj=="product_assembly"){
+                var origin=$("#product_range_account").attr("max");
+                $("#product_account_obj").val("0");
+                $("#product_range_account").val("0");
+                $("#product_account_rep").text(origin);
+            }
             $("#"+obj+"_obj").val(value);
             $("#"+obj+"_rep").text(max-value);
         },
@@ -87,6 +99,35 @@ var util=function () {
             $("#product_assembly_rep").next().text("");
             $("#product_assembly_rep").next().text("");
             $("#product_assembly_account").attr("max","0");
+            $("#productId").val("");
+        },
+        //加入购物车
+        addShopCar:function () {
+            var productId=$("#productId").val();
+            var json={"productId":productId};
+            //如果有拼单,按拼单
+            var count= $("#product_account_obj").val();
+            var count2= $("#product_assembly_obj").val();
+            if(count=="0"&&count2=="0"){
+                alert("您暂未选购任何商品！");
+                return;
+            }
+            json["productCount"]=count;
+            json["productCount2"]=  count2;
+            var local=window.localStorage;
+           var productDetail= local.getItem("productDetail");
+               if(!productDetail){
+                   productDetail=[];
+               }else{
+                   productDetail=JSON.parse(productDetail);
+               }
+               productDetail.push(json);
+               productDetail=JSON.stringify(productDetail);
+               local.setItem("productDetail",productDetail);
+               alert("该商品已经成功添加至购物车！");
+               util.hideDialog("product");
+
+
         }
     }
 

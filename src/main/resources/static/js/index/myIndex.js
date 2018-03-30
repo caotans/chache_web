@@ -20,7 +20,6 @@ var myIndex = function(){
                  dataType:"json",
                  data:{"productId":id},
                  success:function (data) {
-                     console.log(data);
                      //调用模态化窗口
                      util.showDialog("product",data);
                      $('#full_feature').swipeslider();
